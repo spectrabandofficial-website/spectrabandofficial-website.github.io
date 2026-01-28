@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Band Name | Electronic Press Kit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --text: #f5f7fa;
+      --muted: #a0a6b3;
+      --accent: #4f8cff;
+      --radius: 1.25rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #0f1115, #121520);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    header p {
+      margin-top: 1rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 0.75rem;
+    }
+
+    /* Photos */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .photo-grid img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    /* Bios */
+    .bio-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .bio {
+      background: rgba(255,255,255,0.02);
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+
+    .bio h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .bio span {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Music Player */
+    .player iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 1rem;
+      border: none;
+    }
+
+    /* Videos */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-grid iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 1rem;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 900px) {
+      header h1 {
+        font-size: 4rem;
+      }
+
+      .player iframe {
+        height: 250px;
+      }
+
+      .video-grid iframe {
+        height: 240px;
+      }
+    }
+    
+    /* Hero Banner */
+    .hero {
+      position: relative;
+      padding: 0;
+      margin-bottom: 3rem;
+    }
+
+    .hero-image {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      min-height: 350px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 25%;
+      background: linear-gradient(to bottom, rgba(15,17,21,0) 0%, rgba(15,17,21,0.85) 100%);
+      pointer-events: none;
+    }
+
+    .hero-text {
+      text-align: center;
+      margin-top: -4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-text p {
+      margin-top: 1rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (min-width: 900px) {
+      .hero-text h1 {
+        font-size: 4rem;
+      }
+    }
+
+
+
+    /* Fullscreen Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 95vh;
+      border-radius: 1rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .lightbox::after {
+      content: "✕ Click anywhere to close";
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="hero">
+  <div class="hero-image">
+    <!-- Replace banner.jpg with your actual banner image file -->
+    <img src="img/banner.jpg" alt="Band Banner" />
+    <div class="hero-gradient"></div>
+  </div>
+  <div class="hero-text">
+    <h1>SPECTRA</h1>
+    <p>
+      A five-piece instrumental progressive metal band driven by two extended-range guitars,  heavy synths, bombastic drumming, and a five-string bass, creating a mix of crushing riffs and upbeat melodies.
+    </p>
+  </div>
+</header>
+
+  <main class="container">
+
+    <!-- Photos Section -->
+    <section class="card">
+      <h2>Press Photos</h2>
+      <div class="photo-grid">
+        <img src="img/bandpics/1.jpg" alt="Band Photo 1">
+        <img src="img/bandpics/2.png" alt="Band Photo 2">
+        <img src="img/bandpics/4.png" alt="Band Photo 3">
+        <img src="img/bandpics/5.png" alt="Band Photo 4">
+      </div>
+    </section>
+
+    <!-- Bios Section 
+    <section class="card">
+      <h2>Band & Member Bios</h2>
+      <div class="bio-list">
+        <div class="bio">
+          <h3>Band Bio</h3>
+          <span>Overview</span>
+          <p>
+            YOUR BAND NAME is a genre-defying group blending modern production with raw,
+            high-impact live energy. Known for memorable hooks, powerful performances,
+            and a loyal fanbase, the band continues to build momentum across streaming
+            platforms and live venues.
+          </p>
+        </div>
+
+        <div class="bio">
+          <h3>Member Name</h3>
+          <span>Vocals / Instrument</span>
+          <p>
+            Short bio for this band member. Musical background, influences, and what
+            they bring to the sound and live show.
+          </p>
+        </div>
+
+        <div class="bio">
+          <h3>Member Name</h3>
+          <span>Instrument</span>
+          <p>
+            Short bio for this band member. Musical background, influences, and role
+            in the band.
+          </p>
+        </div>
+
+        <div class="bio">
+          <h3>Member Name</h3>
+          <span>Instrument</span>
+          <p>
+            Short bio for this band member. Fun facts, influences, and performance
+            highlights.
+          </p>
+        </div>
+      </div>
+    </section>
+-->
+    <!-- Music Player -->
+    <section class="card player">
+      <h2>Listen</h2>
+      <p style="color: var(--muted); margin-bottom: 1rem;">
+        Embedded player for your latest singles and fan favorites.
+      </p>
+
+      <!-- Local MP3 Player -->
+<div class="local-player">
+<img id="albumArt" src="img/artwork/album1.jpg" alt="Album Art" />
+
+
+<div class="track-info">
+<h3 id="trackTitle">Track Title</h3>
+<span id="trackAlbum">Album Name</span>
+
+
+<div class="controls">
+<button id="playPause">Play</button>
+<button id="prevTrack">⏮</button>
+<button id="nextTrack">⏭</button>
+</div>
+
+
+<input id="progress" class="progress" type="range" min="0" max="100" value="0" />
+</div>
+</div>
+      <!-- You can swap this with SoundCloud or Bandcamp embeds as well -->
+    </section>
+
+    <!-- Videos Section -->
+    <section class="card">
+      <h2>Latest Music Videos</h2>
+      <div class="video-grid">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/UHc3Fy6iv28?si=ArdLMSXGrpwGU5RB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ypom2AFeb7c?si=AECrIKAHU0wRPJIn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZpsqjmV-hhI?si=HZJpy38oxJBd_JzU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="card">
+      <h2>Booking & Contact</h2>
+      <p>
+        For booking, press, and management inquiries, reach out below:
+      </p>
+      <p style="margin-top: 1rem;">
+        📧 <strong>Email:</strong> <a href="mailto:spectra.band.official@gmail.com">spectra.band.official@gmail.com</a><br />
+        🌐 <strong>Website:</strong> <a href="https://spectra.band">https://spectra.band</a><br />
+        📱 <strong>Instagram:</strong><a href="https://www.instagram.com/spectra.musicofficial">@spectra.musicofficial</a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      © <span id="year"></span> SPECTRA · EPK
+    </p>
+    <p>
+      <a href="https://open.spotify.com/artist/6VqO07BB27vGYd7y4tvetq">Spotify</a> · <a href="https://www.youtube.com/@spectra9293">YouTube</a> · <a href="https://www.instagram.com/spectra.musicofficial">Instagram</a>
+    </p>
+  </footer>
+
+  <!-- Fullscreen Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Expanded Press Photo" />
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  
+
+    // Fullscreen press photo viewer
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+
+    document.querySelectorAll(".photo-grid img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+      lightboxImg.src = "";
+    });
+
+// Local MP3 player logic
+const tracks = [
+{
+title: "Song One",
+album: "Debut EP",
+src: "music/las.wav",
+art: "img/artwork/album1.jpg"
+},
+{
+title: "Song Two",
+album: "Debut EP",
+src: "music/song2.mp3",
+art: "img/artwork/album1.jpg"
+},
+{
+title: "Song Three",
+album: "New Record",
+src: "music/song3.mp3",
+art: "img/artwork/album2.jpg"
+}
+];
+
+
+const audio = new Audio();
+const titleEl = document.getElementById("trackTitle");
+const albumEl = document.getElementById("trackAlbum");
+const artEl = document.getElementById("albumArt");
+const playBtn = document.getElementById("playPause");
+const prevBtn = document.getElementById("prevTrack");
+const nextBtn = document.getElementById("nextTrack");
+const progress = document.getElementById("progress");
+const playlistEl = document.getElementById("playlist");
+
+
+let currentTrack = 0;
+
+
+function loadTrack(index) {
+const track = tracks[index];
+audio.src = track.src;
+titleEl.textContent = track.title;
+albumEl.textContent = track.album;
+artEl.src = track.art;
+
+
+document.querySelectorAll(".track").forEach((el, i) => {
+el.classList.toggle("active", i === index);
+});
+}
+
+
+function playPause() {
+if (audio.paused) {
+audio.play();
+playBtn.textContent = "Pause";
+} else {
+audio.pause();
+playBtn.textContent = "Play";
+}
+}
+
+
+function nextTrack() {
+currentTrack = (currentTrack + 1) % tracks.length;
+loadTrack(currentTrack);
+audio.play();
+playBtn.textContent = "Pause";
+}
+
+
+function prevTrack() {
+currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+loadTrack(currentTrack);
+audio.play();
+playBtn.textContent = "Pause";
+}
+
+
+audio.addEventListener("timeupdate", () => {
+if (audio.duration) {
+progress.value = (audio.currentTime / audio.duration) * 100;
+}
+});
+
+
+progress.addEventListener("input", () => {
+if (audio.duration) {
+audio.currentTime = (progress.value / 100) * audio.duration;
+}
+});
+
+
+playBtn.addEventListener("click", playPause);
+nextBtn.addEventListener("click", nextTrack);
+prevBtn.addEventListener("click", prevTrack);
+
+
+// Build playlist
+tracks.forEach((track, index) => {
+const div = document.createElement("div");
+div.className = "track";
+div.textContent = `${track.title} — ${track.album}`;
+div.addEventListener("click", () => {
+currentTrack = index;
+loadTrack(currentTrack);
+audio.play();
+playBtn.textContent = "Pause";
+});
+playlistEl.appendChild(div);
+});
+
+
+// Init
+loadTrack(currentTrack);
+
+  </script>
+
+</body>
+</html>
