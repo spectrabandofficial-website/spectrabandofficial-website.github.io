@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Band Name | Electronic Press Kit</title>
+  <title>Spectra | Electronic Press Kit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Fonts & Icons -->
@@ -271,11 +271,122 @@
       font-size: 0.9rem;
     }
 
+
+
+    /* Local MP3 Player */
+    .local-player {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(255,255,255,0.03);
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+
+    .local-player img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .track-info {
+      flex: 1;
+    }
+
+    .track-info h3 {
+      margin-bottom: 0.25rem;
+      font-size: 1.2rem;
+    }
+
+    .track-info span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .controls button {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .controls button:hover {
+      opacity: 0.85;
+    }
+
+    .progress {
+      width: 100%;
+      margin-top: 0.75rem;
+    }
+
+    .playlist {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .track {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .track:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .track.active {
+      background: rgba(79, 140, 255, 0.25);
+    }
+
+    .track span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .track {
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .track:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .track.active {
+      background: rgba(79, 140, 255, 0.25);
+    }
+
 </style>
 </head>
 <body>
 
-  <!-- Header -->
+<!-- Header -->
   <header class="hero">
   <div class="hero-image">
     <!-- Replace banner.jpg with your actual banner image file -->
@@ -292,7 +403,7 @@
 
   <main class="container">
 
-    <!-- Photos Section -->
+        <!-- Photos Section -->
     <section class="card">
       <h2>Press Photos</h2>
       <div class="photo-grid">
@@ -355,26 +466,24 @@
       </p>
 
       <!-- Local MP3 Player -->
-<div class="local-player">
-<img id="albumArt" src="img/artwork/album1.jpg" alt="Album Art" />
+      <div class="local-player">
+        <img id="albumArt" src="img/artwork/studio.jpg" alt="Album Art" />
 
+        <div class="track-info">
+          <h3 id="trackTitle">Track Title</h3>
+          <span id="trackAlbum">Album Name</span>
 
-<div class="track-info">
-<h3 id="trackTitle">Track Title</h3>
-<span id="trackAlbum">Album Name</span>
+          <div class="controls">
+            <button id="prevTrack">⏮</button>
+            <button id="playPause">Play</button>
+            <button id="nextTrack">⏭</button>
+          </div>
 
+          <input id="progress" class="progress" type="range" min="0" max="100" value="0" />
+        </div>
+      </div>
 
-<div class="controls">
-<button id="playPause">Play</button>
-<button id="prevTrack">⏮</button>
-<button id="nextTrack">⏭</button>
-</div>
-
-
-<input id="progress" class="progress" type="range" min="0" max="100" value="0" />
-</div>
-</div>
-      <!-- You can swap this with SoundCloud or Bandcamp embeds as well -->
+      <div class="playlist" id="playlist"></div>
     </section>
 
     <!-- Videos Section -->
@@ -384,6 +493,7 @@
         <iframe width="560" height="315" src="https://www.youtube.com/embed/UHc3Fy6iv28?si=ArdLMSXGrpwGU5RB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/ypom2AFeb7c?si=AECrIKAHU0wRPJIn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/ZpsqjmV-hhI?si=HZJpy38oxJBd_JzU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
       </div>
     </section>
 
@@ -437,120 +547,127 @@
       lightboxImg.src = "";
     });
 
-// Local MP3 player logic
-const tracks = [
-{
-title: "Song One",
-album: "Debut EP",
-src: "music/las.wav",
-art: "img/artwork/album1.jpg"
-},
-{
-title: "Song Two",
-album: "Debut EP",
-src: "music/song2.mp3",
-art: "img/artwork/album1.jpg"
-},
-{
-title: "Song Three",
-album: "New Record",
-src: "music/song3.mp3",
-art: "img/artwork/album2.jpg"
-}
-];
+  
 
+    // Local MP3 player logic
+    const tracks = [
+      {
+        title: "Meridian",
+        album: "Places We Only Dream Of",
+        src: "music/Meridian.mp3",
+        art: "img/artwork/studio.jpg"
+      },
+      {
+        title: "Evergreen",
+        album: "Places We Only Dream Of",
+        src: "music/Evergreen.mp3",
+        art: "img/artwork/studio.jpg"
+      },
+      {
+        title: "Valhalla - Live Version",
+        album: "Places We Only Dream Of - Live At Meteor",
+        src: "music/ValhallaLive.mp3",
+        art: "img/artwork/live.jpg"
+      },
+      {
+        title: "Wastelands",
+        album: "Places We Only Dream Of",
+        src: "music/Wastelands.mp3",
+        art: "img/artwork/studio.jpg"
+      }
 
-const audio = new Audio();
-const titleEl = document.getElementById("trackTitle");
-const albumEl = document.getElementById("trackAlbum");
-const artEl = document.getElementById("albumArt");
-const playBtn = document.getElementById("playPause");
-const prevBtn = document.getElementById("prevTrack");
-const nextBtn = document.getElementById("nextTrack");
-const progress = document.getElementById("progress");
-const playlistEl = document.getElementById("playlist");
+    ];
 
+    const audio = new Audio();
+    const titleEl = document.getElementById("trackTitle");
+    const albumEl = document.getElementById("trackAlbum");
+    const artEl = document.getElementById("albumArt");
+    const playBtn = document.getElementById("playPause");
+    const prevBtn = document.getElementById("prevTrack");
+    const nextBtn = document.getElementById("nextTrack");
+    const progress = document.getElementById("progress");
+    const playlistEl = document.getElementById("playlist");
 
-let currentTrack = 0;
+    let currentTrack = 0;
 
+    function loadTrack(index) {
+      const track = tracks[index];
+      audio.src = track.src;
+      titleEl.textContent = track.title;
+      albumEl.textContent = track.album;
+      artEl.src = track.art;
 
-function loadTrack(index) {
-const track = tracks[index];
-audio.src = track.src;
-titleEl.textContent = track.title;
-albumEl.textContent = track.album;
-artEl.src = track.art;
+      document.querySelectorAll(".track").forEach((el, i) => {
+        el.classList.toggle("active", i === index);
+      });
+    }
 
+    function playPause() {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "Pause";
+      } else {
+        audio.pause();
+        playBtn.textContent = "Play";
+      }
+    }
 
-document.querySelectorAll(".track").forEach((el, i) => {
-el.classList.toggle("active", i === index);
-});
-}
+    function nextTrack() {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack(currentTrack);
+      audio.play();
+      playBtn.textContent = "Pause";
+    }
 
+    function prevTrack() {
+      currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+      loadTrack(currentTrack);
+      audio.play();
+      playBtn.textContent = "Pause";
+    }
 
-function playPause() {
-if (audio.paused) {
-audio.play();
-playBtn.textContent = "Pause";
-} else {
-audio.pause();
-playBtn.textContent = "Play";
-}
-}
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) {
+        progress.value = (audio.currentTime / audio.duration) * 100;
+      }
+    });
 
+    progress.addEventListener("input", () => {
+      if (audio.duration) {
+        audio.currentTime = (progress.value / 100) * audio.duration;
+      }
+    });
 
-function nextTrack() {
-currentTrack = (currentTrack + 1) % tracks.length;
-loadTrack(currentTrack);
-audio.play();
-playBtn.textContent = "Pause";
-}
+    playBtn.addEventListener("click", playPause);
+    nextBtn.addEventListener("click", nextTrack);
+    prevBtn.addEventListener("click", prevTrack);
 
+    // Build playlist
+    tracks.forEach((track, index) => {
+      const div = document.createElement("div");
+      div.className = "track";
 
-function prevTrack() {
-currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-loadTrack(currentTrack);
-audio.play();
-playBtn.textContent = "Pause";
-}
+      const info = document.createElement("div");
+      info.textContent = track.title;
 
+      const album = document.createElement("span");
+      album.textContent = track.album;
 
-audio.addEventListener("timeupdate", () => {
-if (audio.duration) {
-progress.value = (audio.currentTime / audio.duration) * 100;
-}
-});
+      div.appendChild(info);
+      div.appendChild(album);
 
+      div.addEventListener("click", () => {
+        currentTrack = index;
+        loadTrack(currentTrack);
+        audio.play();
+        playBtn.textContent = "Pause";
+      });
 
-progress.addEventListener("input", () => {
-if (audio.duration) {
-audio.currentTime = (progress.value / 100) * audio.duration;
-}
-});
+      playlistEl.appendChild(div);
+    });
 
-
-playBtn.addEventListener("click", playPause);
-nextBtn.addEventListener("click", nextTrack);
-prevBtn.addEventListener("click", prevTrack);
-
-
-// Build playlist
-tracks.forEach((track, index) => {
-const div = document.createElement("div");
-div.className = "track";
-div.textContent = `${track.title} — ${track.album}`;
-div.addEventListener("click", () => {
-currentTrack = index;
-loadTrack(currentTrack);
-audio.play();
-playBtn.textContent = "Pause";
-});
-playlistEl.appendChild(div);
-});
-
-
-// Init
-loadTrack(currentTrack);
+    // Init
+    loadTrack(currentTrack);
 
   </script>
 
