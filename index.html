@@ -404,6 +404,111 @@
       background: rgba(79, 140, 255, 0.25);
     }
 
+    /* Shows Section */
+.shows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.show {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.02);
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  gap: 1rem;
+}
+
+.show-info span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.ticket-btn {
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ticket-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.4s ease;
+}
+
+.carousel-track img {
+  min-width: 280px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-track img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-btn.left {
+  left: 0.5rem;
+}
+
+.carousel-btn.right {
+  right: 0.5rem;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .show {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ticket-btn {
+    align-self: flex-end;
+  }
+
+  .carousel-track img {
+    min-width: 220px;
+    height: 150px;
+  }
+}
+
+
 </style>
 </head>
 <body>
@@ -504,6 +609,41 @@
 
       <div class="playlist" id="playlist"></div>
     </section>
+
+    <section class="card">
+  <h2>Shows</h2>
+
+  <!-- Upcoming Shows -->
+  <h3 style="margin-bottom: 1rem;">Upcoming Shows</h3>
+  <div class="shows-list">
+
+    <div class="show">
+      <div class="show-info">
+        <strong>March 11, 2026 - Holy Void w Mr Mule & Spectra</strong>
+        <span>Doors Pub · Hamilton, ON</span>
+      </div>
+      <a class="ticket-btn" href="https://www.instagram.com/p/DTkoxmwkerB/" target="_blank">Tickets at door</a>
+    </div>
+
+
+  </div>
+
+  <!-- Past Shows Carousel -->
+  <h3 style="margin: 2rem 0 1rem;">Notable Past Shows</h3>
+
+  <div class="carousel">
+    <button class="carousel-btn left" id="prevShow">⏴</button>
+
+    <div class="carousel-track" id="carouselTrack">
+      <img src="img/shows/4sb.png" alt="Challenger Deep w Four Stroke Baron tour poster">
+      <img src="img/shows/pwodotour.png" alt="Places We Only Dream Of Tour Poster">
+      <img src="img/shows/vertagogo.png" alt="Headlining at Vertagogo">
+      <img src="img/shows/casbah.png" alt="Casbah">
+    </div>
+
+    <button class="carousel-btn right" id="nextShow">⏵</button>
+  </div>
+</section>
 
     <!-- Videos Section -->
     <section class="card">
@@ -687,6 +827,31 @@
 
     // Init
     loadTrack(currentTrack);
+
+    // Past Shows Carousel
+const track = document.getElementById("carouselTrack");
+const prevShow = document.getElementById("prevShow");
+const nextShow = document.getElementById("nextShow");
+
+let scrollAmount = 0;
+
+nextShow.addEventListener("click", () => {
+  scrollAmount += 300;
+  track.style.transform = `translateX(-${scrollAmount}px)`;
+});
+
+prevShow.addEventListener("click", () => {
+  scrollAmount = Math.max(0, scrollAmount - 300);
+  track.style.transform = `translateX(-${scrollAmount}px)`;
+});
+
+// Lightbox support for carousel images
+document.querySelectorAll(".carousel-track img").forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("active");
+  });
+});
 
   </script>
 
