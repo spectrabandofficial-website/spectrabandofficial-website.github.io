@@ -933,23 +933,44 @@ prevShow.addEventListener("click", () => {
   trackEvent("carousel_prev", "notable_shows");
 });
 
-let notableShowsScrolled = false;
+let notableStarted = false;
+let notableBrowsed = false;
 
-function trackNotableShowsScroll() {
-  if (!notableShowsScrolled) {
-    notableShowsScrolled = true;
-    trackEvent("notable_shows_scrolled", "carousel", "engagement");
+function getScrollProgress() {
+  const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+  if (maxScroll <= 0) return 0;
+  return carousel.scrollLeft / maxScroll;
+}
+
+function trackNotableProgress() {
+  const progress = getScrollProgress();
+
+  // First movement
+  if (!notableStarted && progress > 0.01) {
+    notableStarted = true;
+    trackEvent("notable_shows_started", "carousel", "engagement");
+  }
+
+  // Past halfway
+  if (!notableBrowsed && progress >= 0.5) {
+    notableBrowsed = true;
+    trackEvent("notable_shows_browsed", "carousel", "engagement");
   }
 }
 
-// Track scroll gestures
+// Track finger/trackpad scrolling
 carousel.addEventListener("scroll", () => {
-  trackNotableShowsScroll();
+  trackNotableProgress();
 });
 
-// Also track button-based movement (backup)
-document.getElementById("nextShow")?.addEventListener("click", trackNotableShowsScroll);
-document.getElementById("prevShow")?.addEventListener("click", trackNotableShowsScroll);
+// Also hook into buttons (in case scroll doesn't fire)
+document.getElementById("nextShow")?.addEventListener("click", () => {
+  setTimeout(trackNotableProgress, 300);
+});
+
+document.getElementById("prevShow")?.addEventListener("click", () => {
+  setTimeout(trackNotableProgress, 300);
+});
 </script>
 
 </body>
