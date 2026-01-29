@@ -10,6 +10,15 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
 />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4SFSFPJJ8K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4SFSFPJJ8K');
+</script>
 
   <style>
     :root {
@@ -481,6 +490,36 @@ a {
     border-radius: 999px;
   }
 }
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.7);
+  border: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 5;
+  font-size: 1.1rem;
+}
+
+.carousel-btn.left {
+  left: 0.5rem;
+}
+
+.carousel-btn.right {
+  right: 0.5rem;
+}
+
+.carousel-btn:hover {
+  background: var(--accent);
+}
+
 
 
   </style>
@@ -585,18 +624,22 @@ a {
           <strong>March 11, 2026 - Holy Void w Mr Mule & Spectra</strong>
           <span>Doors Pub · Hamilton, ON</span>
         </div>
-        <a class="ticket-btn" href="https://www.instagram.com/p/DTkoxmwkerB/" target="_blank">Tickets at door</a>
+        <a class="ticket-btn track-ticket" href="https://www.instagram.com/p/DTkoxmwkerB/" target="_blank">Tickets at door</a>
       </div>
     </div>
 
     <h3 style="margin: 2rem 0 1rem;">Notable Past Shows</h3>
 
-    <div class="carousel">
-      <img src="img/shows/4sb.png" alt="Four Stroke Baron Tour">
-      <img src="img/shows/pwodotour.png" alt="PWOD Tour">
-      <img src="img/shows/vertagogo.png" alt="Vertagogo">
-      <img src="img/shows/casbah.png" alt="Casbah">
-    </div>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn left" id="prevShow">⏴</button>
+      <div class="carousel" id="carouselTrack">
+        <img src="img/shows/4sb.png" alt="Four Stroke Baron Tour">
+        <img src="img/shows/pwodotour.png" alt="PWOD Tour">
+        <img src="img/shows/vertagogo.png" alt="Vertagogo">
+        <img src="img/shows/casbah.png" alt="Casbah">
+      </div>
+    <button class="carousel-btn right" id="nextShow">⏵</button>
+  </div>
   </section>
 
   <!-- Reviews -->
@@ -698,8 +741,26 @@ a {
 </div>
 
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
 
+function trackEvent(action, label = "", category = "EPK") {
+  if (typeof gtag === "function") {
+    gtag("event", action, {
+      event_category: category,
+      event_label: label
+    });
+  }
+}
+document.querySelectorAll(".social-bar a, .player-social a").forEach(link => {
+  link.addEventListener("click", () => {
+    trackEvent("social_click", link.href, "social");
+  });
+});
+  document.getElementById("year").textContent = new Date().getFullYear();
+document.querySelectorAll(".track-ticket").forEach(btn => {
+  btn.addEventListener("click", () => {
+    trackEvent("ticket_click", btn.href, "shows");
+  });
+});
   /* Photo Lightbox */
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = lightbox.querySelector("img");
@@ -708,6 +769,7 @@ a {
     img.addEventListener("click", () => {
       lightboxImg.src = img.src;
       lightbox.classList.add("active");
+      trackEvent("photo_expand", img.alt || "press_photo", "media");
     });
   });
 
@@ -723,6 +785,7 @@ a {
 
   document.querySelectorAll(".review-btn").forEach(btn => {
     btn.addEventListener("click", () => {
+      trackEvent("review_open", btn.dataset.url, "reviews");
       window.open(btn.dataset.url, "_blank", "noopener");
     });
   });
@@ -773,6 +836,7 @@ a {
   let currentTrack = 0;
 
   function loadTrack(index) {
+    trackEvent("track_change", tracks[index].title, "player");
     const track = tracks[index];
     audio.src = track.src;
     titleEl.textContent = track.title;
@@ -784,7 +848,8 @@ a {
     });
   }
 
-  function playPause() {
+  function playPause() { 
+    trackEvent(audio.paused ? "play" : "pause", tracks[currentTrack].title, "player");
     if (audio.paused) {
       audio.play();
       playBtn.textContent = "Pause";
@@ -848,6 +913,25 @@ a {
   });
 
   loadTrack(currentTrack);
+
+  const carousel = document.getElementById("carouselTrack");
+const prevShow = document.getElementById("prevShow");
+const nextShow = document.getElementById("nextShow");
+
+function getScrollAmount() {
+  const firstImg = carousel.querySelector("img");
+  return firstImg ? firstImg.clientWidth + 16 : 300;
+}
+
+nextShow.addEventListener("click", () => {
+  carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+  trackEvent("carousel_next", "notable_shows");
+});
+
+prevShow.addEventListener("click", () => {
+  carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+  trackEvent("carousel_prev", "notable_shows");
+});
 </script>
 
 </body>
