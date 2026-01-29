@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spectra | Electronic Press Kit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --text: #f5f7fa;
+      --muted: #a0a6b3;
+      --accent: #4f8cff;
+      --radius: 1.25rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #0f1115, #121520);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    header p {
+      margin-top: 1rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 0.75rem;
+    }
+
+    /* Photos */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 800px) {
+  .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+}
+
+    .photo-grid img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    /* Bios */
+    .bio-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .bio {
+      background: rgba(255,255,255,0.02);
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+
+    .bio h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .bio span {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Music Player */
+    .player iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 1rem;
+      border: none;
+    }
+
+    /* Videos */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-grid iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 1rem;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 900px) {
+      header h1 {
+        font-size: 4rem;
+      }
+
+      .player iframe {
+        height: 250px;
+      }
+
+      .video-grid iframe {
+        height: 240px;
+      }
+    }
+    
+    /* Hero Banner */
+    .hero {
+      position: relative;
+      padding: 0;
+      margin-bottom: 3rem;
+    }
+
+    .hero-image {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      min-height: 350px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 25%;
+      background: linear-gradient(to bottom, rgba(15,17,21,0) 0%, rgba(15,17,21,0.85) 100%);
+      pointer-events: none;
+    }
+
+    .hero-text {
+      text-align: center;
+      margin-top: -4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-text p {
+      margin-top: 1rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (min-width: 900px) {
+      .hero-text h1 {
+        font-size: 4rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .local-player {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .local-player img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+      }
+
+      .controls {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+
+
+    /* Fullscreen Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 95vh;
+      border-radius: 1rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .lightbox::after {
+      content: "✕ Click anywhere to close";
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+
+
+    /* Local MP3 Player */
+    .local-player {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(255,255,255,0.03);
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+
+    .local-player img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .track-info {
+      flex: 1;
+    }
+
+    .track-info h3 {
+      margin-bottom: 0.25rem;
+      font-size: 1.2rem;
+    }
+
+    .track-info span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .controls button {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .controls button:hover {
+      opacity: 0.85;
+    }
+
+    .progress {
+      width: 100%;
+      margin-top: 0.75rem;
+    }
+
+    .playlist {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .track {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .track:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .track.active {
+      background: rgba(79, 140, 255, 0.25);
+    }
+
+    .track span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .track {
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .track:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .track.active {
+      background: rgba(79, 140, 255, 0.25);
+    }
+
+    /* Shows Section */
+.shows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.show {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.02);
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  gap: 1rem;
+}
+
+.show-info span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.ticket-btn {
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ticket-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.4s ease;
+}
+
+.carousel-track img {
+  min-width: 280px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-track img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-btn.left {
+  left: 0.5rem;
+}
+
+.carousel-btn.right {
+  right: 0.5rem;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .show {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ticket-btn {
+    align-self: flex-end;
+  }
+
+  .carousel-track img {
+    min-width: 220px;
+    height: 150px;
+  }
+}
+
+/* Mobile Width Lock Fix */
+body, html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent fixed-width elements from breaking layout */
+.container {
+  max-width: 100%;
+}
+
+/* Fix carousel overflow on mobile */
+@media (max-width: 600px) {
+  .carousel-track {
+    gap: 0.5rem;
+  }
+
+  .carousel-track img {
+    min-width: 75vw;
+    max-width: 75vw;
+    height: 160px;
+  }
+
+  .container {
+    padding: 0 1rem 3rem;
+  }
+}
+
+img, iframe {
+  max-width: 100%;
+}
+
+/* Review Lightbox */
+.review-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.review-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.review-frame {
+  width: 90vw;
+  height: 90vh;
+  border-radius: 1rem;
+  border: none;
+  background: #000;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.review-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+/* HARD MOBILE OVERFLOW KILL SWITCH */
+* {
+  max-width: 100%;
+}
+
+/* Fix hero overflow */
+@media (max-width: 600px) {
+  .hero-text {
+    margin-top: -2rem;
+    padding: 0 1rem;
+  }
+}
+
+/* Prevent long rows from forcing width */
+.show {
+  flex-wrap: wrap;
+}
+
+.show-info {
+  min-width: 0;
+  word-break: break-word;
+}
+
+/* Clamp carousel movement */
+.carousel {
+  overflow: hidden;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+  <header class="hero">
+  <div class="hero-image">
+    <!-- Replace banner.jpg with your actual banner image file -->
+    <img src="img/banner.jpg" alt="Band Banner" />
+    <div class="hero-gradient"></div>
+  </div>
+  <div class="hero-text">
+    <h1>SPECTRA</h1>
+    <p>
+      A five-piece instrumental progressive metal band driven by two extended-range guitars,  heavy synths, bombastic drumming, and a five-string bass, creating a mix of crushing riffs and upbeat melodies.
+    </p>
+  </div>
+</header>
+
+  <main class="container">
+
+        <!-- Photos Section -->
+    <section class="card">
+      <h2>Press Photos</h2>
+      <div class="photo-grid">
+        <img src="img/bandpics/1.jpg" alt="Band Photo 1">
+        <img src="img/bandpics/2.png" alt="Band Photo 2">
+        <img src="img/bandpics/4.png" alt="Band Photo 3">
+        <img src="img/bandpics/5.png" alt="Band Photo 4">
+      </div>
+    </section>
+
+    <!-- Bios Section 
+    <section class="card">
+      <h2>Band & Member Bios</h2>
+      <div class="bio-list">
+        <div class="bio">
+          <h3>Band Bio</h3>
+          <span>Overview</span>
+          <p>
+            YOUR BAND NAME is a genre-defying group blending modern production with raw,
+            high-impact live energy. Known for memorable hooks, powerful performances,
+            and a loyal fanbase, the band continues to build momentum across streaming
+            platforms and live venues.
+          </p>
+        </div>
+
+        <div class="bio">
+          <h3>Member Name</h3>
+          <span>Vocals / Instrument</span>
+          <p>
+            Short bio for this band member. Musical background, influences, and what
+            they bring to the sound and live show.
+          </p>
+        </div>
+
+        <div class="bio">
+          <h3>Member Name</h3>
+          <span>Instrument</span>
+          <p>
+            Short bio for this band member. Musical background, influences, and role
+            in the band.
+          </p>
+        </div>
+
+        <div class="bio">
+          <h3>Member Name</h3>
+          <span>Instrument</span>
+          <p>
+            Short bio for this band member. Fun facts, influences, and performance
+            highlights.
+          </p>
+        </div>
+      </div>
+    </section>
+-->
+    <!-- Music Player -->
+    <section class="card player">
+      <h2>Listen</h2>
+
+      <!-- Local MP3 Player -->
+      <div class="local-player">
+        <img id="albumArt" src="img/artwork/studio.jpg" alt="Album Art" />
+
+        <div class="track-info">
+          <h3 id="trackTitle">Track Title</h3>
+          <span id="trackAlbum">Album Name</span>
+
+          <div class="controls">
+            <button id="prevTrack">⏮</button>
+            <button id="playPause">Play</button>
+            <button id="nextTrack">⏭</button>
+          </div>
+
+          <input id="progress" class="progress" type="range" min="0" max="100" value="0" />
+        </div>
+      </div>
+
+      <div class="playlist" id="playlist"></div>
+    </section>
+
+    <section class="card">
+  <h2>Shows</h2>
+
+  <!-- Upcoming Shows -->
+  <h3 style="margin-bottom: 1rem;">Upcoming Shows</h3>
+  <div class="shows-list">
+
+    <div class="show">
+      <div class="show-info">
+        <strong>March 11, 2026 - Holy Void w Mr Mule & Spectra</strong>
+        <span>Doors Pub · Hamilton, ON</span>
+      </div>
+      <a class="ticket-btn" href="https://www.instagram.com/p/DTkoxmwkerB/" target="_blank">Tickets at door</a>
+    </div>
+
+
+  </div>
+
+  <!-- Past Shows Carousel -->
+  <h3 style="margin: 2rem 0 1rem;">Notable Past Shows</h3>
+
+  <div class="carousel">
+    <button class="carousel-btn left" id="prevShow">⏴</button>
+
+    <div class="carousel-track" id="carouselTrack">
+      <img src="img/shows/4sb.png" alt="Challenger Deep w Four Stroke Baron tour poster">
+      <img src="img/shows/pwodotour.png" alt="Places We Only Dream Of Tour Poster">
+      <img src="img/shows/vertagogo.png" alt="Headlining at Vertagogo">
+      <img src="img/shows/casbah.png" alt="Casbah">
+    </div>
+
+    <button class="carousel-btn right" id="nextShow">⏵</button>
+  </div>
+</section>
+
+    <!-- Videos Section -->
+    <section class="card">
+      <h2>Latest Music Videos</h2>
+      <div class="video-grid">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/UHc3Fy6iv28?si=ArdLMSXGrpwGU5RB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ypom2AFeb7c?si=AECrIKAHU0wRPJIn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZpsqjmV-hhI?si=HZJpy38oxJBd_JzU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      </div>
+    </section>
+
+<section class="card">
+  <h2>Reviews</h2>
+
+  <div class="shows-list">
+    <div class="show">
+      <div class="show-info">
+        <strong>Blast Toronto</strong>
+        <span>Places We Only Dream Of - Album Review</span>
+      </div>
+      <button class="ticket-btn review-btn" 
+        data-url="https://blasttoronto.com/spectra-places-we-only-dream-of/">
+        Read Review
+      </button>
+    </div>
+
+    <div class="show">
+      <div class="show-info">
+        <strong>Prog Sphere</strong>
+        <span>SPECTRA: Capturing the Essence - Interview</span>
+      </div>
+      <button class="ticket-btn review-btn" 
+        data-url="https://www.prog-sphere.com/2025/02/26/spectra-interview/">
+        Read Review
+      </button>
+    </div>
+<div class="show">
+      <div class="show-info">
+        <strong>Blast Toronto</strong>
+        <span>Progressive Rock is alive and well! Show review</span>
+      </div>
+      <button class="ticket-btn review-btn" 
+        data-url="https://blasttoronto.com/progressive-rock-alive-and-well/">
+        Read Review
+      </button>
+    </div>
+<div class="show">
+      <div class="show-info">
+        <strong>Lazland</strong>
+        <span>Places We Only Dream Of - Album Review</span>
+      </div>
+      <button class="ticket-btn review-btn" 
+        data-url="https://lazland.org/album-reviews-2025/spectra-places-we-only-dream-of">
+        Read Review
+      </button>
+    </div>
+  </div>
+<div class="show">
+      <div class="show-info">
+        <strong>Death by Unicorn</strong>
+        <span>Places We Only Dream Of - Album Review (Video)</span>
+      </div>
+      <button class="ticket-btn review-btn" 
+        data-url="https://www.youtube.com/watch?v=LzbnttpIUu8&t=367s">
+        Watch Review
+      </button>
+    </div>
+  </div>
+</section>
+
+    <!-- Contact Section -->
+    <section class="card">
+      <h2>Booking & Contact</h2>
+      <p>
+        For booking, press, and management inquiries, reach out below:
+      </p>
+      <p style="margin-top: 1rem;">
+        📧 <strong>Email:</strong> <a href="mailto:spectra.band.official@gmail.com">spectra.band.official@gmail.com</a><br />
+        🌐 <strong>Website:</strong> <a href="https://spectra.band">https://spectra.band</a><br />
+        📱 <strong>Instagram:</strong><a href="https://www.instagram.com/spectra.musicofficial">@spectra.musicofficial</a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      © <span id="year"></span> SPECTRA · EPK
+    </p>
+    <p>
+      <a href="https://open.spotify.com/artist/6VqO07BB27vGYd7y4tvetq">Spotify</a> · <a href="https://www.youtube.com/@spectra9293">YouTube</a> · <a href="https://spectrabandofficial.bandcamp.com/">Bandcamp</a> · <a href="https://www.instagram.com/spectra.musicofficial">Instagram</a>
+    </p>
+  </footer>
+
+  <!-- Fullscreen Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Expanded Press Photo" />
+  </div>
+
+<div class="review-modal" id="reviewModal">
+  <button class="review-close" id="closeReview">Close ✕</button>
+  <iframe class="review-frame" id="reviewFrame"></iframe>
+</div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  
+
+    // Fullscreen press photo viewer
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+
+    document.querySelectorAll(".photo-grid img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+      lightboxImg.src = "";
+    });
+
+  
+
+    // Local MP3 player logic
+    const tracks = [
+      {
+        title: "Meridian",
+        album: "Places We Only Dream Of",
+        src: "music/Meridian.mp3",
+        art: "img/artwork/studio.jpg"
+      },
+      {
+        title: "Evergreen",
+        album: "Places We Only Dream Of",
+        src: "music/Evergreen.mp3",
+        art: "img/artwork/studio.jpg"
+      },
+      {
+        title: "Valhalla - Live Version",
+        album: "Places We Only Dream Of - Live At Meteor",
+        src: "music/ValhallaLive.mp3",
+        art: "img/artwork/live.jpg"
+      },
+      {
+        title: "Wastelands",
+        album: "Places We Only Dream Of",
+        src: "music/Wastelands.mp3",
+        art: "img/artwork/studio.jpg"
+      }
+
+    ];
+
+    const audio = new Audio();
+    const titleEl = document.getElementById("trackTitle");
+    const albumEl = document.getElementById("trackAlbum");
+    const artEl = document.getElementById("albumArt");
+    const playBtn = document.getElementById("playPause");
+    const prevBtn = document.getElementById("prevTrack");
+    const nextBtn = document.getElementById("nextTrack");
+    const progress = document.getElementById("progress");
+    const playlistEl = document.getElementById("playlist");
+
+    let currentTrack = 0;
+
+    function loadTrack(index) {
+      const track = tracks[index];
+      audio.src = track.src;
+      titleEl.textContent = track.title;
+      albumEl.textContent = track.album;
+      artEl.src = track.art;
+
+      document.querySelectorAll(".track").forEach((el, i) => {
+        el.classList.toggle("active", i === index);
+      });
+    }
+
+    function playPause() {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "Pause";
+      } else {
+        audio.pause();
+        playBtn.textContent = "Play";
+      }
+    }
+
+    function nextTrack() {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack(currentTrack);
+      audio.play();
+      playBtn.textContent = "Pause";
+    }
+
+    function prevTrack() {
+      currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+      loadTrack(currentTrack);
+      audio.play();
+      playBtn.textContent = "Pause";
+    }
+
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) {
+        progress.value = (audio.currentTime / audio.duration) * 100;
+      }
+    });
+
+    progress.addEventListener("input", () => {
+      if (audio.duration) {
+        audio.currentTime = (progress.value / 100) * audio.duration;
+      }
+    });
+
+    playBtn.addEventListener("click", playPause);
+    nextBtn.addEventListener("click", nextTrack);
+    prevBtn.addEventListener("click", prevTrack);
+
+    // Build playlist
+    tracks.forEach((track, index) => {
+      const div = document.createElement("div");
+      div.className = "track";
+
+      const info = document.createElement("div");
+      info.textContent = track.title;
+
+      const album = document.createElement("span");
+      album.textContent = track.album;
+
+      div.appendChild(info);
+      div.appendChild(album);
+
+      div.addEventListener("click", () => {
+        currentTrack = index;
+        loadTrack(currentTrack);
+        audio.play();
+        playBtn.textContent = "Pause";
+      });
+
+      playlistEl.appendChild(div);
+    });
+
+    // Init
+    loadTrack(currentTrack);
+
+    // Past Shows Carousel
+const track = document.getElementById("carouselTrack");
+const prevShow = document.getElementById("prevShow");
+const nextShow = document.getElementById("nextShow");
+
+let scrollAmount = 0;
+
+nextShow.addEventListener("click", () => {
+  scrollAmount += 300;
+  track.style.transform = `translateX(-${scrollAmount}px)`;
+});
+
+prevShow.addEventListener("click", () => {
+  scrollAmount = Math.max(0, scrollAmount - 300);
+  track.style.transform = `translateX(-${scrollAmount}px)`;
+});
+
+// Lightbox support for carousel images
+document.querySelectorAll(".carousel-track img").forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("active");
+  });
+});
+
+// Review modal logic
+const reviewModal = document.getElementById("reviewModal");
+const reviewFrame = document.getElementById("reviewFrame");
+const closeReview = document.getElementById("closeReview");
+
+document.querySelectorAll(".review-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const url = btn.dataset.url;
+    reviewFrame.src = url;
+    reviewModal.classList.add("active");
+  });
+});
+
+closeReview.addEventListener("click", () => {
+  reviewModal.classList.remove("active");
+  reviewFrame.src = "";
+});
+
+
+  </script>
+
+</body>
+</html>
