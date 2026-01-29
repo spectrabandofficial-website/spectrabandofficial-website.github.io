@@ -932,6 +932,24 @@ prevShow.addEventListener("click", () => {
   carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
   trackEvent("carousel_prev", "notable_shows");
 });
+
+let notableShowsScrolled = false;
+
+function trackNotableShowsScroll() {
+  if (!notableShowsScrolled) {
+    notableShowsScrolled = true;
+    trackEvent("notable_shows_scrolled", "carousel", "engagement");
+  }
+}
+
+// Track scroll gestures
+carousel.addEventListener("scroll", () => {
+  trackNotableShowsScroll();
+});
+
+// Also track button-based movement (backup)
+document.getElementById("nextShow")?.addEventListener("click", trackNotableShowsScroll);
+document.getElementById("prevShow")?.addEventListener("click", trackNotableShowsScroll);
 </script>
 
 </body>
