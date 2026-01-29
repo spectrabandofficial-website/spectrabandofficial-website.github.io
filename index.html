@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+/>
 
   <style>
     :root {
@@ -156,6 +160,39 @@
       border-radius: 0.75rem;
       flex-shrink: 0;
     }
+/* Player Social Icons */
+.player-social {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.player-social a {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.player-social a:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+}
+
+/* Mobile tweak */
+@media (max-width: 500px) {
+  .player-social {
+    justify-content: center;
+  }
+}
+
 
     .track-info {
       flex: 1 1 200px;
@@ -392,13 +429,78 @@
     display: block;
 }
 
+/* Social Bar */
+.social-bar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 5;
+}
+
+.social-bar a {
+  width: 40px;
+  height: 40px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.social-bar a:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+}
+
+/* Mobile Friendly */
+@media (max-width: 500px) {
+  .social-bar {
+    top: auto;
+    bottom: 1rem;
+    right: 50%;
+    transform: translateX(50%);
+    background: rgba(0,0,0,0.4);
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+  }
+}
+
+
   </style>
 </head>
 <body>
 
 <header class="hero">
   <div class="hero-image">
+<div class="social-bar">
+  <a href="https://www.instagram.com/spectra.musicofficial" target="_blank" aria-label="Instagram">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+  <a href="https://www.facebook.com/spectra.band.official" target="_blank" aria-label="Instagram">
+    <i class="fa-brands fa-facebook"></i>
+  </a>
+
+  <a href="https://spectrabandofficial.bandcamp.com" target="_blank" aria-label="Bandcamp">
+    <i class="fa-brands fa-bandcamp"></i>
+  </a>
+  <a href="https://open.spotify.com/artist/6VqO07BB27vGYd7y4tvetq" target="_blank" aria-label="Spotify">
+    <i class="fa-brands fa-spotify"></i>
+  </a>
+  <a href="https://music.apple.com/ca/artist/spectra/1775093772" target="_blank" aria-label="Apple Music">
+    <i class="fa-brands fa-apple"></i>
+  </a>
+  <a href="https://tidal.com/artist/51726018" target="_blank" aria-label="Tidal">
+    <i class="fa-brands fa-tidal" style="color: #e4dcdc;"></i>
+  </a>
+</div>
     <img src="img/banner.jpg" alt="Band Banner" class="fade-image"/>
+
     <div class="hero-gradient"></div>
   </div>
   <div class="hero-text">
@@ -441,6 +543,20 @@
 
         <input id="progress" class="progress" type="range" min="0" max="100" value="0" />
       </div>
+<div class="player-social">
+  <a href="https://spectrabandofficial.bandcamp.com" target="_blank" aria-label="Bandcamp">
+    <i class="fa-brands fa-bandcamp"></i>
+  </a>
+  <a href="https://open.spotify.com/artist/6VqO07BB27vGYd7y4tvetq" target="_blank" aria-label="Spotify">
+    <i class="fa-brands fa-spotify"></i>
+  </a>
+  <a href="https://music.apple.com/ca/artist/spectra/1775093772" target="_blank" aria-label="Apple Music">
+    <i class="fa-brands fa-apple"></i>
+  </a>
+  <a href="https://tidal.com/artist/51726018" target="_blank" aria-label="Tidal">
+    <i class="fa-brands fa-tidal" style="color: #e4dcdc;"></i>
+  </a>
+</div>
     </div>
 
     <div class="playlist" id="playlist"></div>
@@ -596,8 +712,7 @@
 
   document.querySelectorAll(".review-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      reviewFrame.src = btn.dataset.url;
-      reviewModal.classList.add("active");
+      window.open(btn.dataset.url, "_blank", "noopener");
     });
   });
 
