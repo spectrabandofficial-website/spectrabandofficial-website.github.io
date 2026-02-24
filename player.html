@@ -1,0 +1,284 @@
+<html>
+    <head>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+/>
+<style>
+        /* Music Player */
+    .local-player {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: rgba(255,255,255,0.03);
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+
+    .local-player img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      flex-shrink: 0;
+    }
+/* Player Social Icons */
+.player-social {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.player-social a {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.player-social a:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+}
+
+/* Mobile tweak */
+@media (max-width: 500px) {
+  .player-social {
+    justify-content: center;
+  }
+}
+
+
+    .track-info {
+      flex: 1 1 200px;
+      min-width: 0;
+    }
+
+    .track-info h3 {
+      margin-bottom: 0.25rem;
+      font-size: 1.2rem;
+    }
+
+    .track-info span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .controls button {
+      background: var(--accent);
+      border: none;
+      color: black;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .progress {
+      width: 100%;
+      margin-top: 0.75rem;
+    }
+
+    .playlist {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .track {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .track span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .track:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .track.active {
+      background: rgba(79,140,255,0.25);
+    }
+</style>
+ <section class="card">
+    <h2>Listen</h2>
+
+    <div class="local-player">
+      <img id="albumArt" src="img/artwork/studio.jpg" alt="Album Art" />
+
+      <div class="track-info">
+        <h3 id="trackTitle">Track Title</h3>
+        <span id="trackAlbum">Album Name</span>
+
+        <div class="controls">
+          <button id="prevTrack">⏮</button>
+          <button id="playPause">Play</button>
+          <button id="nextTrack">⏭</button>
+        </div>
+
+        <input id="progress" class="progress" type="range" min="0" max="100" value="0" />
+      </div>
+<div class="player-social">
+  <a href="https://spectrabandofficial.bandcamp.com" target="_blank" aria-label="Bandcamp">
+    <i class="fa-brands fa-bandcamp"></i>
+  </a>
+  <a href="https://open.spotify.com/artist/6VqO07BB27vGYd7y4tvetq" target="_blank" aria-label="Spotify">
+    <i class="fa-brands fa-spotify"></i>
+  </a>
+  <a href="https://music.apple.com/ca/artist/spectra/1775093772" target="_blank" aria-label="Apple Music">
+    <i class="fa-brands fa-apple"></i>
+  </a>
+  <a href="https://tidal.com/artist/51726018" target="_blank" aria-label="Tidal">
+    <i class="fa-brands fa-tidal"></i>
+  </a>
+</div>
+    </div>
+
+    <div class="playlist" id="playlist"></div>
+  </section>
+
+    <script>
+         /* Audio Player */
+  const tracks = [
+      {
+        title: "Meridian",
+        album: "Places We Only Dream Of",
+        src: "music/Meridian.mp3",
+        art: "img/artwork/studio.jpg"
+      },
+      {
+        title: "Evergreen",
+        album: "Places We Only Dream Of",
+        src: "music/Evergreen.mp3",
+        art: "img/artwork/studio.jpg"
+      },
+      {
+        title: "Valhalla - Live Version",
+        album: "Places We Only Dream Of - Live At Meteor",
+        src: "music/ValhallaLive.mp3",
+        art: "img/artwork/live.jpg"
+      },
+      {
+        title: "Wastelands",
+        album: "Places We Only Dream Of",
+        src: "music/Wastelands.mp3",
+        art: "img/artwork/studio.jpg"
+      }
+  ];
+
+  const audio = new Audio();
+  const titleEl = document.getElementById("trackTitle");
+  const albumEl = document.getElementById("trackAlbum");
+  const artEl = document.getElementById("albumArt");
+  const playBtn = document.getElementById("playPause");
+  const prevBtn = document.getElementById("prevTrack");
+  const nextBtn = document.getElementById("nextTrack");
+  const progress = document.getElementById("progress");
+  const playlistEl = document.getElementById("playlist");
+
+  let currentTrack = 0;
+
+  function loadTrack(index) {
+    const track = tracks[index];
+    audio.src = track.src;
+    titleEl.textContent = track.title;
+    albumEl.textContent = track.album;
+    artEl.src = track.art;
+
+    document.querySelectorAll(".track").forEach((el, i) => {
+      el.classList.toggle("active", i === index);
+    });
+  }
+
+  function playPause() { 
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = "Pause";
+    } else {
+      audio.pause();
+      playBtn.textContent = "Play";
+    }
+  }
+
+  function nextTrack() {
+    currentTrack = (currentTrack + 1) % tracks.length;
+    loadTrack(currentTrack);
+    audio.play();
+    playBtn.textContent = "Pause";
+  }
+
+  function prevTrack() {
+    currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+    loadTrack(currentTrack);
+    audio.play();
+    playBtn.textContent = "Pause";
+  }
+
+  audio.addEventListener("timeupdate", () => {
+    if (audio.duration) {
+      progress.value = (audio.currentTime / audio.duration) * 100;
+    }
+  });
+
+  progress.addEventListener("input", () => {
+    if (audio.duration) {
+      audio.currentTime = (progress.value / 100) * audio.duration;
+    }
+  });
+
+  playBtn.addEventListener("click", playPause);
+  nextBtn.addEventListener("click", nextTrack);
+  prevBtn.addEventListener("click", prevTrack);
+
+  tracks.forEach((track, index) => {
+    const div = document.createElement("div");
+    div.className = "track";
+
+    const info = document.createElement("div");
+    info.textContent = track.title;
+
+    const album = document.createElement("span");
+    album.textContent = track.album;
+
+    div.appendChild(info);
+    div.appendChild(album);
+
+    div.addEventListener("click", () => {
+      currentTrack = index;
+      loadTrack(currentTrack);
+      audio.play();
+      playBtn.textContent = "Pause";
+    });
+
+    playlistEl.appendChild(div);
+  });
+
+  loadTrack(currentTrack);
+    </script>
+</html>
