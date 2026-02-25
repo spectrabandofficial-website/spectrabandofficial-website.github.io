@@ -618,26 +618,40 @@ a {
 
     <h3 style="margin-bottom: 1rem;">Upcoming Shows</h3>
 
-    <div class="shows-list">
-      <div class="show">
-        <div class="show-info">
-          <strong>March 11, 2026 - Holy Void w Mr Mule & Spectra</strong>
-          <span>Doors Pub · Hamilton, ON</span>
-        </div>
-        <a class="ticket-btn track-ticket" href="https://www.instagram.com/p/DTkoxmwkerB/" target="_blank">Tickets at door</a>
-      </div>
-    </div>
+    <div class="shows-list" id="upcomingShowsList"></div>
 
     <h3 style="margin: 2rem 0 1rem;">Notable Past Shows</h3>
 
     <div class="carousel-wrapper">
       <button class="carousel-btn left" id="prevShow">⏮</button>
       <div class="carousel" id="carouselTrack">
-        <img src="img/shows/4sb.png" alt="Four Stroke Baron Tour">
-        <img src="img/shows/pwodotour.png" alt="PWOD Tour">
-        <img src="img/shows/vertagogo.png" alt="Vertagogo">
-        <img src="img/shows/casbah.png" alt="Casbah">
+        <div class="show-item" data-visible="2025-03-12">
+          <img src="img/shows/4sb.png" alt="Four Stroke Baron Tour" style="width: 100%; margin: 0;">
+        </div>
+        <div class="show-item" data-visible="2025-04-15">
+          <img src="img/shows/pwodotour.png" alt="PWODO Tour" style="width: 100%; margin: 0;">
+        </div>
+        <div class="show-item" data-visible="2026-03-12">
+          <img src="img/shows/holyvoid.png" alt="Holy Void w Mr Mule" id="holyVoidShow" style="width: 100%; margin: 0;">
+        </div>
+        <div class="show-item" data-visible="2025-06-10">
+          <img src="img/shows/vertagogo.png" alt="Vertagogo" style="width: 100%; margin: 0;">
+        </div>
+        <div class="show-item" data-visible="2025-07-05">
+          <img src="img/shows/casbah.png" alt="Casbah" style="width: 100%; margin: 0;">
+        </div>
       </div>
+
+      <script>
+        const showItems = document.querySelectorAll('.show-item');
+
+        showItems.forEach(item => {
+          const visibleDate = new Date(item.getAttribute('data-visible'));
+          if (new Date() < visibleDate) {
+        item.style.display = "none";
+          }
+        });
+      </script>
     <button class="carousel-btn right" id="nextShow">⏭</button>
   </div>
   </section>
@@ -805,6 +819,18 @@ document.querySelectorAll(".track-ticket").forEach(btn => {
     reviewFrame.src = "";
   });
 
+  /* Shows */
+
+  const shows = [
+    {
+      date: "March 11, 2026",
+      title: "Holy Void w Mr Mule & Spectra",
+      venue: "Doors Pub · Hamilton, ON",
+      url: "https://www.instagram.com/p/DTkoxmwkerB/",
+      expiry: new Date("2026-03-12")
+    }
+  ]
+
   /* Audio Player */
   const tracks = [
       {
@@ -898,6 +924,32 @@ document.querySelectorAll(".track-ticket").forEach(btn => {
   playBtn.addEventListener("click", playPause);
   nextBtn.addEventListener("click", nextTrack);
   prevBtn.addEventListener("click", prevTrack);
+  numShows = 0;
+  shows.forEach(show => {
+    if (new Date() < show.expiry) {
+      const div = document.createElement("div");
+      div.className = "show";
+
+      const info = document.createElement("div");
+      info.className = "show-info";
+      info.innerHTML = `<strong>${show.date} - ${show.title}</strong><span>${show.venue}</span>`;
+
+      const btn = document.createElement("a");
+      btn.className = "ticket-btn track-ticket";
+      btn.href = show.url;
+      btn.target = "_blank";
+      btn.textContent = "Tickets";
+
+      div.appendChild(info);
+      div.appendChild(btn);
+
+      document.getElementById("upcomingShowsList").appendChild(div);
+      numShows++;
+    }
+  });
+  if (numShows === 0) {
+    document.getElementById("upcomingShowsList").textContent = "No upcoming shows at the moment. Stay tuned!";
+  }
 
   tracks.forEach((track, index) => {
     const div = document.createElement("div");
