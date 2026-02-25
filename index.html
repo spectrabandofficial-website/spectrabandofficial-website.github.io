@@ -519,6 +519,18 @@ a {
 .carousel-btn:hover {
   background: var(--accent);
 }
+/* Mobile: show 1.5 cards */
+@media (max-width: 600px) {
+  .carousel .show-item {
+    flex: 0 0 65% !important;  /* 1 full card + a hint of the next */
+    max-width: 65% !important;
+  }
+
+  .carousel img {
+    height: 240px;   /* optional – keeps aspect nice on small screens */
+    object-fit: cover;
+  }
+}
 
 
 
@@ -625,22 +637,24 @@ a {
     <div class="carousel-wrapper">
       <button class="carousel-btn left" id="prevShow">⏮</button>
       <div class="carousel" id="carouselTrack">
-        <div class="show-item" data-visible="2025-03-12">
-          <img src="img/shows/4sb.png" alt="Four Stroke Baron Tour" style="width: 100%; margin: 0;">
-        </div>
-        <div class="show-item" data-visible="2025-04-15">
-          <img src="img/shows/pwodotour.png" alt="PWODO Tour" style="width: 100%; margin: 0;">
-        </div>
-        <div class="show-item" data-visible="2026-03-12">
-          <img src="img/shows/holyvoid.png" alt="Holy Void w Mr Mule" id="holyVoidShow" style="width: 100%; margin: 0;">
-        </div>
-        <div class="show-item" data-visible="2025-06-10">
-          <img src="img/shows/vertagogo.png" alt="Vertagogo" style="width: 100%; margin: 0;">
-        </div>
-        <div class="show-item" data-visible="2025-07-05">
-          <img src="img/shows/casbah.png" alt="Casbah" style="width: 100%; margin: 0;">
-        </div>
+      <div class="show-item" data-visible="2025-03-12" style="flex: 0 0 25%;">
+        <img src="img/shows/4sb.png" alt="Four Stroke Baron Tour" style="width: 100%; margin: 0;">
       </div>
+      <div class="show-item" data-visible="2025-04-15" style="flex: 0 0 25%;">
+        <img src="img/shows/pwodotour.png" alt="PWODO Tour" style="width: 100%; margin: 0;">
+      </div>
+      <div class="show-item" data-visible="2026-01-12" style="flex: 0 0 25%;">
+        <img src="img/shows/holyvoid.png" alt="Holy Void w Mr Mule" id="holyVoidShow" style="width: 100%; margin: 0;">
+      </div>
+      <div class="show-item" data-visible="2025-06-10" style="flex: 0 0 25%;">
+        <img src="img/shows/vertagogo.png" alt="Vertagogo" style="width: 100%; margin: 0;">
+      </div>
+      <div class="show-item" data-visible="2025-07-05" style="flex: 0 0 25%;">
+        <img src="img/shows/casbah.png" alt="Casbah" style="width: 100%; margin: 0;">
+      </div>
+      </div>
+      <button class="carousel-btn right" id="nextShow">⏭</button>
+    </div>
 
       <script>
         const showItems = document.querySelectorAll('.show-item');
@@ -827,7 +841,7 @@ document.querySelectorAll(".track-ticket").forEach(btn => {
       title: "Holy Void w Mr Mule & Spectra",
       venue: "Doors Pub · Hamilton, ON",
       url: "https://www.instagram.com/p/DTkoxmwkerB/",
-      expiry: new Date("2026-03-12")
+      expiry: new Date("2026-01-12")
     }
   ]
 
