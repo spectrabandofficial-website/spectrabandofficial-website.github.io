@@ -637,6 +637,9 @@ a {
     <div class="carousel-wrapper">
       <button class="carousel-btn left" id="prevShow">⏮</button>
       <div class="carousel" id="carouselTrack">
+        <div class="show-item" data-visible="2025-03-12" style="flex: 0 0 25%;">
+        <img src="img/shows/shubh.png" alt="Shubh Saran & NRTHRN Tour" style="width: 100%; margin: 0;">
+      </div>
       <div class="show-item" data-visible="2025-03-12" style="flex: 0 0 25%;">
         <img src="img/shows/4sb.png" alt="Four Stroke Baron Tour" style="width: 100%; margin: 0;">
       </div>
@@ -835,6 +838,13 @@ document.querySelectorAll(".track-ticket").forEach(btn => {
   /* Shows */
 
   const shows = [
+    {
+      date: "November 3, 2026",
+      title: "Galactic Empire with Spectra",
+      venue: "Mills Hardware, Hamilton, ON",
+      url: "https://www.tixr.com/groups/sonicunyon/events/galactic-empire-spectra-206654",
+      expiry: new Date("2026-11-04")
+    },
     {
       date: "March 11, 2026",
       title: "Holy Void w Mr Mule & Spectra",
